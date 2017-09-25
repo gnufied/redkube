@@ -7,7 +7,7 @@ module RedKube
       pod.pvc_name = pvc_name
       pod.name = pod_name
 
-      pod_erb = EBR.new(erb_file)
+      pod_erb = ERB.new(erb_file)
       yaml_result = pod_erb.result(pod.get_binding)
       pod_path = "#{RedKube.tmp_path}/#{pod_name}.yaml"
 

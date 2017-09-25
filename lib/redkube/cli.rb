@@ -11,7 +11,7 @@ module RedKube
     def pod_mark(run_name)
       RedKube.run_name(run_name)
 
-      sc = "default"
+      sc = "slow"
 
       if options[:sc] && !options[:sc].empty?
         sc = options[:sc]
