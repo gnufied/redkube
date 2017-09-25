@@ -1,4 +1,4 @@
 module RedKube
-  class PVC
+  class PVC < Common
   end
 end
