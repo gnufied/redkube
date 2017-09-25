@@ -8,6 +8,9 @@ module RedKube
     option :sc,
       type: :string,
       banner: "Storageclass to use"
+    option :cmd,
+      type: :string,
+      banner: "binary name to use"
     def pod_mark(run_name)
       RedKube.run_name(run_name)
 

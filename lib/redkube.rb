@@ -19,6 +19,7 @@ require 'fileutils'
 module RedKube
   CONFIG_DIR = File.expand_path(File.join(File.expand_path(File.dirname(__FILE__)), "../config"))
   @run_name = "default"
+  @run_cmd = "kubectl"
   def self.run_name(default_run_name = nil)
     unless default_run_name
       return @run_name
@@ -47,7 +48,12 @@ module RedKube
     end
   end
 
-  def self.cmd
-    "kubectl"
+  def self.cmd(run_cmd = nil)
+    if run_cmd
+      @run_cmd = run_cmd
+      @run_cmd
+    else
+      @run_cmd
+    end
   end
 end
