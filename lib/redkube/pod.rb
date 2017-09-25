@@ -32,10 +32,13 @@ module RedKube
     end
 
     def delete
-      `#{RedKube.cmd} delete pod #{name}`
+      delete_cmd = "#{RedKube.cmd} delete pod #{name}"
+      puts "Running #{delete_cmd}"
+      system(delete_cmd)
 
       check_status do
-        `#{RedKube.cmd} get pod #{name} - o json`
+        get_command = "#{RedKube.cmd} get pod #{name} -o json"
+        system(get_command)
 
         if $? != 0
           true
