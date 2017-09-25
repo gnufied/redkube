@@ -11,7 +11,7 @@ module RedKube
         diff = Time.now() - t1
         puts "Running #{key} took #{diff} seconds"
         @benchmark_results[key] ||= []
-        @benchmark_results[key][i] << diff
+        @benchmark_results[key] << diff
       end
       print_results()
     end

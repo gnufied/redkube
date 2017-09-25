@@ -24,6 +24,7 @@ module RedKube
         load_from_json(t)
 
         if loaded
+          puts "Checking pod status #{loaded} #{status['phase']}"
           return status["phase"] == "Running"
         end
         false
