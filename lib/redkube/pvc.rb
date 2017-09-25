@@ -26,8 +26,9 @@ module RedKube
         if loaded && self.status
           puts "Checking pvc status #{loaded} #{status['phase']}"
           status["phase"] == "Bound"
+        else
+          false
         end
-        false
       end
     end
   end

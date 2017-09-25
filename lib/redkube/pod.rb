@@ -26,8 +26,9 @@ module RedKube
         if loaded && self.status
           puts "Checking pod status #{loaded} #{status['phase']}"
           status["phase"] == "Running"
+        else
+          false
         end
-        false
       end
     end
 
