@@ -12,7 +12,6 @@ module RedKube
       type: :string,
       banner: "binary name to use"
     def pod_mark(run_name)
-      RedKube.run_name(run_name)
       sc = "slow"
 
       if options[:sc] && !options[:sc].empty?
@@ -23,6 +22,7 @@ module RedKube
         RedKube.cmd(options[:cmd])
       end
 
+      RedKube.run_name(run_name)
       RedKube::PodMark.new().start(sc)
     end
   end
