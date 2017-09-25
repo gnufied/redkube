@@ -20,6 +20,7 @@ module RedKube
   CONFIG_DIR = File.expand_path(File.join(File.expand_path(File.dirname(__FILE__)), "../config"))
   @run_name = "default"
   @run_cmd = "kubectl"
+  @count = 5
   def self.run_name(default_run_name = nil)
     unless default_run_name
       return @run_name
