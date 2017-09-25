@@ -19,11 +19,13 @@ require 'fileutils'
 module RedKube
   CONFIG_DIR = File.expand_path(File.join(File.expand_path(File.dirname(__FILE__)), "../config"))
   @run_name = "default"
-  def self.run_name(default_run_name = "default")
-    if default_run_name
+  def self.run_name(default_run_name = nil)
+    unless default_run_name
+      return @run_name
+    else
       @run_name = default_run_name
+      @run_name
     end
-    @run_name
   end
 
   def self.tmp_path
