@@ -24,6 +24,7 @@ module RedKube
       return @run_name
     else
       @run_name = default_run_name
+      switch_context(default_run_name)
       @run_name
     end
   end
@@ -34,6 +35,16 @@ module RedKube
       FileUtils.mkdir(fl_path)
     end
     fl_path
+  end
+
+  def self.switch_context(context_name)
+    if cmd == "kubectl"
+      system("kubectl create namespace #{context_name}")
+      system("kubectl config set-context #{context_name} --namespace=#{context_name}")
+      system("kubectl config use-context #{context_name}")
+    else
+      puts "Dunno how to handle this"
+    end
   end
 
   def self.cmd
