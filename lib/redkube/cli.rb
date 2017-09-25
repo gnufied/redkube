@@ -23,7 +23,7 @@ module RedKube
       end
 
       RedKube.run_name(run_name)
-      RedKube::PodMark.new().start(sc)
+      RedKube::PodNoVol.new().start(sc)
     end
   end
 end
