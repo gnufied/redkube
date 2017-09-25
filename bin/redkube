@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+redkube_lib_path = File.expand_path('../../lib', __FILE__)
+$:.unshift(redkube_lib_path)
+require "redkube"
+
+RedKube::CLI.start(ARGV)
