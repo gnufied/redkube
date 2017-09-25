@@ -13,12 +13,16 @@ module RedKube
       banner: "binary name to use"
     def pod_mark(run_name)
       RedKube.run_name(run_name)
-
       sc = "slow"
 
       if options[:sc] && !options[:sc].empty?
         sc = options[:sc]
       end
+
+      if options[:cmd] && !options[:cmd].empty?
+        RedKube.cmd(options[:cmd])
+      end
+
       RedKube::PodMark.new().start(sc)
     end
   end
