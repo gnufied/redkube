@@ -24,7 +24,6 @@ module RedKube
         load_from_json(t)
 
         if loaded && self.status
-          puts "Checking pvc status #{loaded} #{status['phase']}"
           status["phase"] == "Bound"
         else
           false
