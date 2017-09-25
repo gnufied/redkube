@@ -10,7 +10,7 @@ module RedKube
       benchmark("pod_creation") do |index|
         pod_name = "dyn-pod-#{index}"
         pvc_name = "dyn-pvc-#{index}"
-
+        puts "Creating pod #{pod_name}"
         pvc = PVC.from_erb(pvc_yaml, pvc_name, sc_name)
         pvc.check_for_pvc
 
@@ -21,7 +21,7 @@ module RedKube
       benchmark("pod_delete_recreate") do |index|
         pod_name = "dyn-pod-#{index}"
         pvc_name = "dyn-pvc-#{index}"
-
+        puts "Recreating pod #{pod_name}"
         pod = Pod.new()
         pod.name = pod_name
 
