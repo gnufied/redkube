@@ -32,7 +32,7 @@ module RedKube
     end
 
     def delete
-      `#{RedKube.cm} delete pod #{name}`
+      `#{RedKube.cmd} delete pod #{name}`
 
       check_status do
         `#{RedKube.cmd} get pod #{name} - o json`
