@@ -5,7 +5,7 @@ module RedKube
     end
 
     def benchmark(key)
-      10.times do |i|
+      5.times do |i|
         t1 = Time.now()
         yield i
         diff = Time.now() - t1
