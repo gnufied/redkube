@@ -45,7 +45,7 @@ module RedKube
       system("kubectl config set-context #{context_name} --namespace=#{context_name}")
       system("kubectl config use-context #{context_name}")
     else
-      puts "Dunno how to handle this"
+      system("oc new-project #{context_name}")
     end
   end
 

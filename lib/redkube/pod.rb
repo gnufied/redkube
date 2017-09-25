@@ -2,9 +2,12 @@ module RedKube
   class Pod < Common
     attr_accessor :pvc_name
 
-    def self.from_erb(erb_file, pod_name, pvc_name)
+    def self.from_erb(erb_file, pod_name, pvc_name = nil)
       pod = Pod.new()
-      pod.pvc_name = pvc_name
+      if pvc_name
+        pod.pvc_name = pvc_name
+      end
+
       pod.name = pod_name
 
       pod_erb = ERB.new(erb_file)

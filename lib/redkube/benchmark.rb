@@ -7,7 +7,6 @@ module RedKube
         t1 = Time.now()
         yield i
         diff = Time.now() - t1
-        puts "Running #{key} took #{diff} seconds"
         benchmark_results[key] ||= []
         benchmark_results[key] << diff
       end
@@ -17,7 +16,6 @@ module RedKube
     def print_results(benchmark_results)
       benchmark_results.each do |key, value|
         sum = value.inject(0) { |mem, obj| mem + obj }
-        puts "Sum is #{sum}"
         average = sum / value.size()
         puts "Operation #{key} took on average #{average}"
       end
