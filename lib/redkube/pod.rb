@@ -9,9 +9,12 @@ module RedKube
 
       pod_erb = EBR.new(erb_file)
       yaml_result = pod_erb.result(pod.get_binding)
-      File.open("#{RedKube.tmp_path}/#{pod_name}.yaml", "w") do |fl|
+      pod_path = "#{RedKube.tmp_path}/#{pod_name}.yaml"
+
+      File.open(pod_path, "w") do |fl|
         fl.write(yaml_result)
       end
+      system("#{RedKube.cmd} create -f #{pod_path}")
       pod
     end
 

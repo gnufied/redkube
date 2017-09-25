@@ -14,6 +14,7 @@ module RedKube
       File.open(pvc_path, "w") do |fl|
         fl.write(yaml_result)
       end
+      system("#{RedKube.cmd} create -f #{pvc_path}")
       pvc
     end
 
