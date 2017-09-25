@@ -24,7 +24,7 @@ module RedKube
         load_from_json(t)
 
         if loaded
-          return (status["phase"] == "Bound")
+          status["phase"] == "Bound"
         end
         false
       end
