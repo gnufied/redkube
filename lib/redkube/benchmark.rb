@@ -19,7 +19,7 @@ module RedKube
         sum = value.inject(0) { |mem, obj| mem + obj }
         puts "Sum is #{sum}"
         average = sum / value.size()
-        Puts "Operation #{key} took on average #{average}"
+        puts "Operation #{key} took on average #{average}"
       end
     end
   end
