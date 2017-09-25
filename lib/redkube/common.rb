@@ -9,15 +9,27 @@ module RedKube
     end
 
     def load_from_json(json_data)
-      if data
-        data = data.strip!
-        if !data.empty?
+      if json_data
+        json_data = json_data.strip!
+        if json_data && !json_data.empty?
           json_object = JSON.load(json_data)
           load_metadata(json_object['metadata'])
           load_status(json_object['status'])
           load_spec(json_object['spec'])
           self.loaded = true
         end
+      end
+    end
+
+    def get_binding
+      binding()
+    end
+
+    def check_status()
+      loop do
+        t = yield
+        break if t
+        sleep(2)
       end
     end
 
