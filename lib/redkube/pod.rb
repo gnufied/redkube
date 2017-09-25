@@ -23,7 +23,7 @@ module RedKube
         t = `#{RedKube.cmd} get pod #{name} -o json`
         load_from_json(t)
 
-        if loaded
+        if loaded && self.status
           puts "Checking pod status #{loaded} #{status['phase']}"
           status["phase"] == "Running"
         end
