@@ -11,6 +11,9 @@ module RedKube
     option :cmd,
       type: :string,
       banner: "binary name to use"
+    option :run,
+      type: :string,
+      banner: "Which benchmark to run"
     def pod_mark(run_name)
       sc = "slow"
 
@@ -23,7 +26,13 @@ module RedKube
       end
 
       RedKube.run_name(run_name)
-      RedKube::PodNoVol.new().start(sc)
+      klass_to_run = "PodMark"
+
+      if options[:run] && !options[:run].empty?
+        klass_to_run = options[:run]
+      end
+      klass = RedKube.const_get(klass_to_run.to_sym)
+      klass.new().start(sc)
     end
   end
 end
