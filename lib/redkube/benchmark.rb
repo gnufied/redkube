@@ -16,7 +16,9 @@ module RedKube
 
     def print_results(benchmark_results)
       benchmark_results.each do |key, value|
-        average = value.sum() / value.size()
+        sum = value.inject(0) { |mem, obj| mem + obj }
+        puts "Sum is #{sum}"
+        average = sum / value.size()
         Puts "Operation #{key} took on average #{average}"
       end
     end
