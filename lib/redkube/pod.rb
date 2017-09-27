@@ -36,7 +36,7 @@ module RedKube
 
     def create_pod_from_yaml(yaml_file)
       check_status do
-        pod_cmd = "#{RedKube.cmd} create -f #{pod_path}"
+        pod_cmd = "#{RedKube.cmd} create -f #{yaml_file}"
         puts "Creating pod #{pod_cmd}"
         `#{pod_cmd}`
 
