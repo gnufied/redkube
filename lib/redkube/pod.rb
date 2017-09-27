@@ -17,7 +17,7 @@ module RedKube
       File.open(pod_path, "w") do |fl|
         fl.write(yaml_result)
       end
-      create_pod_from_yaml(pod_path)
+      pod.create_pod_from_yaml(pod_path)
       pod
     end
 
