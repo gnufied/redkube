@@ -13,6 +13,7 @@ require "redkube/pod"
 require "redkube/pvc"
 require "redkube/pod_mark"
 require "redkube/pod_no_vol"
+require "redkube/overlap_pod"
 require "redkube/cli"
 
 require 'fileutils'
