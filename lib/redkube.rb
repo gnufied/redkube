@@ -48,6 +48,7 @@ module RedKube
       system("kubectl config use-context #{context_name}")
     else
       system("oc new-project #{context_name}")
+      system("oc #{context_name}")
     end
   end
 
