@@ -27,10 +27,11 @@ module RedKube
 
     def check_status()
       loop do
+        yield_status = false
         begin
-          t = yield
-          break if t
+          yield_status = yield
         rescue; end
+        break if yield_status
         sleep(2)
       end
     end
