@@ -51,5 +51,11 @@ module RedKube
         end
       end
     end
+
+    def delete_pod_without_wait
+      delete_cmd = "#{RedKube.cmd} delete pod #{name}"
+      puts "Running #{delete_cmd}"
+      `#{delete_cmd}`
+    end
   end
 end
