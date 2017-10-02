@@ -147,7 +147,9 @@ class ExportPrometheus
       metric_collection.parse_metric
       if !metric_collection.blank?
         sfx_metrics = metric_collection.signalfx_metric
-        puts "********** Sending total of #{sfx_metrics.size} metrics"
+        puts "********** Sending total of cumulative_counters: #{sfx_metrics[:cumulative_counters].size} metrics"
+        puts "********** Sending total of gauge: #{sfx_metrics[:gauges].size} metrics"
+        puts "********** Sending total of counters: #{sfx_metrics[:counters].size} metrics"
         client.send_async(sfx_metrics)
       end
 
