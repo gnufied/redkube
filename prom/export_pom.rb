@@ -143,13 +143,14 @@ class ExportPrometheus
       cmd_string = "curl --insecure --cert /etc/origin/master/#{host_config['crt']} --key /etc/origin/master/#{host_config['key']} #{host_config['url']}"
       puts "Command to run is #{cmd_string}"
       data = `#{cmd_string}`
-      metric_collection = MetricCollection.new(data, host_config['ip'], host_config['role'])
+      ip = host_config['ip']
+      metric_collection = MetricCollection.new(data, ip, host_config['role'])
       metric_collection.parse_metric
       if !metric_collection.blank?
         sfx_metrics = metric_collection.signalfx_metric
-        puts "********** Sending total of cumulative_counters: #{sfx_metrics[:cumulative_counters].size} metrics"
-        puts "********** Sending total of gauge: #{sfx_metrics[:gauges].size} metrics"
-        puts "********** Sending total of counters: #{sfx_metrics[:counters].size} metrics"
+        puts "********** Sending total of cumulative_counters: #{sfx_metrics[:cumulative_counters].size} metrics for #{ip}"
+        puts "********** Sending total of gauge: #{sfx_metrics[:gauges].size} metrics for #{ip}"
+        puts "********** Sending total of counters: #{sfx_metrics[:counters].size} metrics for #{ip}"
         client.send_async(sfx_metrics)
       end
 
