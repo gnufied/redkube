@@ -53,6 +53,7 @@ class MetricCollection
 
       raw_data.split("\n").each do |metric_line|
         next if metric_line =~ /^#/
+        puts "Line is #{line}"
         name, rest = metric_line.split("{", 2)
         dim_string, value = rest.split("}", 2)
 
