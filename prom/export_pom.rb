@@ -128,5 +128,7 @@ class ExportPrometheus
   end
 end
 
-t = ExportPrometheus.new(ARGV[1])
+filename = ARGV[1]
+puts filename
+t = ExportPrometheus.new(filename)
 t.start_emitting
