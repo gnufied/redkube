@@ -146,10 +146,9 @@ class ExportPrometheus
       metric_collection = MetricCollection.new(data, host_config['ip'], host_config['role'])
       metric_collection.parse_metric
       if !metric_collection.blank?
-        puts "********** Sending total of #{metric_collection.size} metrics"
         sfx_metrics = metric_collection.signalfx_metric
-        puts "Sending metrics #{sfx_metrics}"
-        client.send(sfx_metrics)
+        puts "********** Sending total of #{sfx_metrics.size} metrics"
+        client.send_async(sfx_metrics)
       end
 
       sleep(60)
