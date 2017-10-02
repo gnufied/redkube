@@ -125,6 +125,7 @@ class ExportPrometheus
       puts "Command to run is #{cmd_string}"
       data = `#{cmd_string}`
       metric_collection = MetricCollection.new(data, host_config['ip'], host_config['role'])
+      metric_collection.parse_metric
       if !metric_collection.blank?
         puts "********** Sending total of #{metric_collection.size} metrics"
         client.send(metric_collection.signalfx_metric)
