@@ -18,7 +18,7 @@ module RedKube
         pod.check_for_pod
       end
 
-      benchmark("* create_delete_loop", 5) do |i|
+      benchmark("* create_delete_loop", 100) do |i|
         benchmark(">> pod_delete_recreate", 1) do |index|
           pod_name = "dyn-pod-#{index}"
           pvc_name = "dyn-pvc-#{index}"
