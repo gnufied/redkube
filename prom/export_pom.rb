@@ -53,16 +53,24 @@ class MetricCollection
 
       raw_data.split("\n").each do |metric_line|
         next if metric_line =~ /^#/
-        puts "Line is #{line}"
+        puts "Line is #{metric_line}"
         name, rest = metric_line.split("{", 2)
-        dim_string, value = rest.split("}", 2)
+        if rest
+          dim_string, value = rest.split("}", 2)
 
-        metric = Metric.new(name, value)
+          metric = Metric.new(name, value)
 
-        metric.set_dims(dim_string)
-        metric.add_dims("ip", @ip)
-        metric.add_dims("role", @role)
-        @metrics << metric
+          metric.set_dims(dim_string)
+          metric.add_dims("ip", @ip)
+          metric.add_dims("role", @role)
+          @metrics << metric
+        else
+          name, value = metric_line.split(" ")
+          metric = Metric.new(name, value)
+          metric.add_dims("ip", @ip)
+          metric.add_dims("role", @role)
+          @metrics << metric
+        end
       end
     end
 
