@@ -114,7 +114,7 @@ class ExportPrometheus
   end
 
   def collect_metric_from_host(host_config)
-    client = SignalFx.new "TOKEN"
+    client = SignalFx.new(ENV['SFX_TOKEN'])
 
     loop do
       data = `curl --insecure --cert /etc/origin/master/#{host_config['crt']} --key /etc/origin/master/#{host_config['key']} #{host_config['url']}`
