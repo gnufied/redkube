@@ -121,7 +121,9 @@ class ExportPrometheus
     client = SignalFx.new(ENV['SFX_TOKEN'])
 
     loop do
-      data = `curl --insecure --cert /etc/origin/master/#{host_config['crt']} --key /etc/origin/master/#{host_config['key']} #{host_config['url']}`
+      cmd_string = "curl --insecure --cert /etc/origin/master/#{host_config['crt']} --key /etc/origin/master/#{host_config['key']} #{host_config['url']}"
+      puts "Command to run is #{cmd_string}"
+      data = `#{cmd_string}`
       metric_collection = MetricCollection.new(data, host_config['ip'], host_config['role'])
       if !metric_collection.blank?
         puts "********** Sending total of #{metric_collection.size} metrics"
