@@ -32,7 +32,7 @@ class Metric
   end
 
   def add_dims(k, v)
-    @dimes[k] = v
+    @dims[k] = v
   end
 end
 
