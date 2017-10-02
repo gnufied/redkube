@@ -95,6 +95,10 @@ class MetricCollection
   def blank?
     metrics.empty?
   end
+
+  def size
+    metrics.size
+  end
 end
 
 class ExportPrometheus
@@ -120,6 +124,7 @@ class ExportPrometheus
       data = `curl --insecure --cert /etc/origin/master/#{host_config['crt']} --key /etc/origin/master/#{host_config['key']} #{host_config['url']}`
       metric_collection = MetricCollection.new(data, host_config['ip'], host_config['role'])
       if !metric_collection.blank?
+        puts "********** Sending total of #{metric_collection.size} metrics"
         client.send(metric_collection.signalfx_metric)
       end
 
@@ -128,7 +133,7 @@ class ExportPrometheus
   end
 end
 
-filename = ARGV[1]
+filename = ARGV[0]
 puts filename
 t = ExportPrometheus.new(filename)
 t.start_emitting
