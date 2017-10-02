@@ -20,7 +20,7 @@ class Metric
   def set_dims(dim_string)
     return if !dim_string
     dim_string.strip!
-    return if dim_string.empty?
+    return if !dim_string || dim_string.empty?
 
     dim_array = dim_string.split(",")
     dim_array.each do |dim|
@@ -48,7 +48,7 @@ class MetricCollection
   def parse_metric
     return if !raw_data
     raw_data.strip!
-    return if raw_data.empty?
+    return if !raw_data || raw_data.empty?
 
     raw_data.split("\n").each do |metric_line|
       next if metric_line =~ /^#/
