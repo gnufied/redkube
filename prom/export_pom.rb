@@ -153,7 +153,7 @@ class ExportPrometheus
         client.send_async(sfx_metrics)
       end
 
-      sleep(60)
+      sleep(30)
     end
   end
 end
