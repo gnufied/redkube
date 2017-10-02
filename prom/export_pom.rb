@@ -34,6 +34,14 @@ class Metric
   def add_dims(k, v)
     @dims[k] = v
   end
+
+  def get_sfx_dims
+    sfx_dims = []
+    @dims.each do |key,value|
+      sfx_dims << {:key => key, :value => value}
+    end
+    sfx_dims
+  end
 end
 
 class MetricCollection
@@ -53,7 +61,6 @@ class MetricCollection
 
       raw_data.split("\n").each do |metric_line|
         next if metric_line =~ /^#/
-        puts "Line is #{metric_line}"
         name, rest = metric_line.split("{", 2)
         if rest
           dim_string, value = rest.split("}", 2)
@@ -85,14 +92,14 @@ class MetricCollection
           :metric => metric.name,
           :value => metric.value,
           :timestamp => get_time_msec,
-          :dimensions => [metric.dims]
+          :dimensions => metric.get_sfx_dims()
         }
       else
         signalfx_data[:gauges] << {
           :metric => metric.name,
           :value => metric.value,
           :timestamp => get_time_msec,
-          :dimensions => [metric.dims]
+          :dimensions => metric.get_sfx_dims()
         }
       end
     end
