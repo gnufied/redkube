@@ -25,10 +25,28 @@ class Metric
     dim_array = dim_string.split(",")
     dim_array.each do |dim|
       k, v = dim.split("=")
-      k.strip!
-      v.strip!
+      k = k.strip
+      v = v.strip
+      k = unquote(k)
+      v = unquote(v)
       @dims[k] = v
     end
+  end
+
+  def unquote(incoming)
+    s = incoming.dup
+
+    case incoming[0,1]
+    when "'", '"', '`'
+      s[0] = ''
+    end
+
+    case incoming[-1,1]
+    when "'", '"', '`'
+      s[-1] = ''
+    end
+
+    return s
   end
 
   def add_dims(k, v)
