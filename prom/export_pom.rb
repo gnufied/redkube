@@ -105,7 +105,7 @@ class MetricCollection
     signalfx_data = {cumulative_counters: [], gauges: [], counters: {}}
     metrics.each do |metric|
       if metric.name == "storage_operation_duration_seconds_sum"
-        puts "Sending metrics with dimensions #{metric.dims} and value #{metric.value}"
+        puts "Sending metrics with dimensions #{metric.dims} and value #{metric.value} and time #{get_time_msec()}"
       end
 
       case metric.mtype
@@ -113,14 +113,14 @@ class MetricCollection
         signalfx_data[:cumulative_counters] << {
           :metric => metric.name,
           :value => metric.value,
-          :timestamp => get_time_msec,
+          :timestamp => get_time_msec(),
           :dimensions => metric.get_sfx_dims()
         }
       else
         signalfx_data[:gauges] << {
           :metric => metric.name,
           :value => metric.value,
-          :timestamp => get_time_msec,
+          :timestamp => get_time_msec(),
           :dimensions => metric.get_sfx_dims()
         }
       end
