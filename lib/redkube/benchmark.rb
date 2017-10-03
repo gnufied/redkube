@@ -1,3 +1,5 @@
+require 'signalx'
+
 module RedKube
   class Benchmark
 
@@ -19,6 +21,11 @@ module RedKube
         average = sum / value.size()
         puts "Operation #{key} took on average #{average}"
       end
+    end
+
+    def get_hostname
+      hostname = `hostname`
+      hostname.strip
     end
   end
 end

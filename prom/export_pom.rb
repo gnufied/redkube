@@ -86,6 +86,10 @@ class MetricCollection
   def signalfx_metric
     signalfx_data = {cumulative_counters: [], gauges: [], counters: {}}
     metrics.each do |metric|
+      if metric.name == "storage_operation_duration_seconds_sum"
+        puts "Sending metrics with dimensions #{metric.dims}"
+      end
+
       case metric.mtype
       when "cumulative"
         signalfx_data[:cumulative_counters] << {
@@ -148,9 +152,9 @@ class ExportPrometheus
       metric_collection.parse_metric
       if !metric_collection.blank?
         sfx_metrics = metric_collection.signalfx_metric
-        puts "********** Sending total of cumulative_counters: #{sfx_metrics[:cumulative_counters].size} metrics for #{ip}"
-        puts "********** Sending total of gauge: #{sfx_metrics[:gauges].size} metrics for #{ip}"
-        puts "********** Sending total of counters: #{sfx_metrics[:counters].size} metrics for #{ip}"
+        puts "********** Sending total of cm_ct: #{sfx_metrics[:cumulative_counters].size} metrics for #{ip} #{Time.now}"
+        puts "********** Sending total of gauge: #{sfx_metrics[:gauges].size} metrics for #{ip} #{Time.now}"
+        puts "********** Sending total of counters: #{sfx_metrics[:counters].size} metrics for #{ip} #{Time.now}"
         client.send_async(sfx_metrics)
       end
 
