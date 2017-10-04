@@ -1,5 +1,3 @@
-require 'signalx'
-
 module RedKube
   class Benchmark
 

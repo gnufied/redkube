@@ -1,0 +1,14 @@
+[
+    {
+        "ip": "172.18.12.173", "url": "https://172.18.12.173:8444/metrics",
+        "role": "master", "crt": "admin.crt", "key": "admin.key"
+    },
+    {
+      "ip": "172.18.4.139", "url":  "https://172.18.4.139:10250/metrics",
+        "role": "node", "crt": "master.kubelet-client.crt", "key": "master.kubelet-client.key"
+    },
+    {
+      "ip": "172.18.11.122", "url": "https://172.18.11.122:10250/metrics",
+      "role": "node", "crt": "master.kubelet-client.crt", "key": "master.kubelet-client.key"
+    }
+];
