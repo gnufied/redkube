@@ -24,7 +24,7 @@ spec:
 
   volumes:
     <% @pvc_names.each do |pvc_name| %>
-    - name: <%= pvc_name>
+    - name: <%= pvc_name %>
       persistentVolumeClaim:
         claimName: <%= pvc_name %>
     <% end %>

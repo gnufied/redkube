@@ -8,6 +8,7 @@ module RedKube
         pod.pvc_names = pvc_names
       end
 
+
       pod.name = pod_name
 
       pod_erb = ERB.new(erb_file)
