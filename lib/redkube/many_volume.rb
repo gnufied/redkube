@@ -10,6 +10,7 @@ module RedKube
       benchmark("pod_creation", 27) do |index|
         pvc_name1 = "dyn-pvc-#{index}-1"
         pvc_name2 = "dyn-pvc-#{index}-2"
+        pvc_name3 = "dyn-pvc-#{index}-3"
 
         pvc1 = PVC.from_erb(pvc_yaml, pvc_name1, sc_name)
         pvc1.check_for_pvc
@@ -17,8 +18,11 @@ module RedKube
         pvc2 = PVC.from_erb(pvc_yaml, pvc_name2, sc_name)
         pvc2.check_for_pvc
 
+        pvc3 = PVC.from_erb(pvc_yaml, pvc_name3, sc_name)
+        pvc3.check_for_pvc
+
         pod_name = "dyn-pod-#{index}"
-        pod = ManyPVCPod.from_erb(pod_yaml, pod_name, pvc_name1, pvc_name2)
+        pod = ManyPVCPod.from_erb(pod_yaml, pod_name, pvc_name1, pvc_name2, pvc_name3)
         pod.check_for_pod
       end
     end
