@@ -15,6 +15,9 @@ require "redkube/pod_mark"
 require "redkube/pod_no_vol"
 require "redkube/overlap_pod"
 require "redkube/cli"
+require "redkube/many_volume"
+require "redkube/many_pvc_pod"
+
 
 require 'fileutils'
 

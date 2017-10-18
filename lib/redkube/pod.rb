@@ -4,6 +4,7 @@ module RedKube
 
     def self.from_erb(erb_file, pod_name, pvc_name = nil)
       pod = Pod.new()
+
       if pvc_name
         pod.pvc_name = pvc_name
       end

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <%= @name %>
+  labels:
+    name: <%= @name %>
+spec:
+  restartPolicy: Never
+  containers:
+    - resources:
+        limits :
+          cpu: 0.5
+      image: gcr.io/google_containers/busybox
+      command:
+        - "/bin/sh"
+        - "-c"
+        - "while true; do date; date >>/tmp/date; sleep 1; done"
+      name: busybox
+      volumeMounts:
+        <% @pvc_names.each do |pvc_name| %>
+        - name: <%= pvc_name %>
+          mountPath: /mnt/<%= pvc_name %>
+        <% end %>
+
+  volumes:
+    <% @pvc_names.each do |pvc_name| %>
+    - name: <%= pvc_name>
+      persistentVolumeClaim:
+        claimName: <%= pvc_name %>
+    <% end %>
