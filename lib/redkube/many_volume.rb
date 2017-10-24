@@ -21,9 +21,11 @@ module RedKube
         pvc3 = PVC.from_erb(pvc_yaml, pvc_name3, sc_name)
         pvc3.check_for_pvc
 
+        t1 = Time.now
         pod_name = "dyn-pod-#{index}"
         pod = ManyPVCPod.from_erb(pod_yaml, pod_name, pvc_name1, pvc_name2, pvc_name3)
         pod.check_for_pod
+        puts "Time taken to create pod #{Time.now() - t1}"
       end
     end
   end
