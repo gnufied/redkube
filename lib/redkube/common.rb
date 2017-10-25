@@ -25,6 +25,30 @@ module RedKube
       binding()
     end
 
+    def write_yaml_file(erb_file, resource)
+      resource_erb = ERB.new(erb_file)
+      resource_yaml = resource_erb(resource.get_binding)
+      resource_yaml_path = "#{RedKube.tmp_path}/#{resource.name}.yaml"
+      File.open(resource_yaml_path, "w") do |fl|
+        fl.write(resource_yaml)
+      end
+      resource_yaml_path
+    end
+
+    def create_resource(yaml_file)
+      check_status do
+        create_cmd = "#{RedKube.cmd} create -f #{yaml_file}"
+        output = `#{create_cmd}`
+        puts "Ran #{create_cmd} with output #{output}"
+
+        if $? == 0
+          true
+        else
+          false
+        end
+      end
+    end
+
     def check_status()
       loop do
         yield_status = false

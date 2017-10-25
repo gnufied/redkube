@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: <%= @name %>
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: <%= @name %>
+    spec:
+      containers:
+      - name: <%= @name %>
+        image: gcr.io/google_containers/busybox
+        command:
+          - "/bin/sh"
+          - "-c"
+          - "while true; do date; echo \"<%= @dc_name %> `date`\" >>/tmp/date; sleep 1; done"
+        volumeMounts:
+          <% @pvc_names.each do |pvc_name| %>
+          - name: <%= pvc_name %>
+            mountPath: /mnt/<%= pvc_name %>
+          <% end %>
+      volumes:
+        <% @pvc_names.each do |pvc_name| %>
+        - name: <%= pvc_name %>
+          persistentVolumeClaim:
+            claimName: <%= pvc_name %>
+        <% end %>
